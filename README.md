@@ -172,6 +172,30 @@ Once the server is running, you'll see output indicating that the server is read
 - Session management requires getting a session ID from `/sse` endpoint first
 - Each client connection needs a unique session ID for proper communication
 
+## ☁️ Deploying to Google Cloud
+
+You can deploy the GPT Researcher MCP Server to Google Cloud Run for a scalable, serverless environment. Follow these steps:
+
+1.  **Google Cloud Project Setup**:
+    *   Configure your Google Cloud project, enable billing, and activate necessary APIs (Cloud Run, Cloud Build, Artifact Registry).
+    *   Detailed instructions: [GOOGLE_CLOUD_SETUP.md](./GOOGLE_CLOUD_SETUP.md)
+
+2.  **Artifact Registry Setup**:
+    *   Create a Docker repository in Artifact Registry to store your container images.
+    *   Detailed instructions: [ARTIFACT_REGISTRY_SETUP.md](./ARTIFACT_REGISTRY_SETUP.md)
+
+3.  **Build and Push Docker Image**:
+    *   Use Google Cloud Build to build the Docker image and push it to your Artifact Registry.
+    *   Detailed instructions: [CLOUD_BUILD_INSTRUCTIONS.md](./CLOUD_BUILD_INSTRUCTIONS.md)
+    *   Ensure your `server.py` includes a `/health` endpoint for Cloud Run health checks (this was added if you followed the main deployment guide).
+
+4.  **Deploy to Cloud Run**:
+    *   Deploy your container image from Artifact Registry to Cloud Run.
+    *   Configure environment variables (especially `OPENAI_API_KEY` and `TAVILY_API_KEY`), port, and other service settings.
+    *   Detailed instructions: [CLOUD_RUN_DEPLOYMENT.md](./CLOUD_RUN_DEPLOYMENT.md)
+
+Following these guides will help you get your MCP server running on Google Cloud.
+
 ## 🚦 Transport Modes & Best Practices
 
 The GPT Researcher MCP server supports multiple transport protocols and automatically chooses the best one for your environment:
