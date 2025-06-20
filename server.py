@@ -11,6 +11,7 @@ import uuid
 import logging
 from typing import Dict, Any, Optional, List
 from dotenv import load_dotenv
+from fastapi.responses import JSONResponse
 from fastmcp import FastMCP
 from gpt_researcher import GPTResearcher
 
@@ -268,6 +269,12 @@ def research_query(topic: str, goal: str, report_format: str = "research_report"
         A formatted prompt for research
     """
     return create_research_prompt(topic, goal, report_format)
+
+
+@mcp.app.get("/health")
+async def health_check():
+    """Basic health check endpoint."""
+    return JSONResponse({"status": "healthy"})
 
 
 def run_server():
