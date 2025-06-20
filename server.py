@@ -271,7 +271,7 @@ def research_query(topic: str, goal: str, report_format: str = "research_report"
     return create_research_prompt(topic, goal, report_format)
 
 
-@mcp.app.get("/health")
+@mcp.get("/health")
 async def health_check():
     """Basic health check endpoint."""
     return JSONResponse({"status": "healthy"})
